@@ -1,6 +1,16 @@
+const dotenv = require('dotenv')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const connection = require('./database/database')
+
+const askModel = require('./database/Ask')
+
+dotenv.config()
+
+connection.authenticate()
+.then(() => console.log('conexão feita com o banco de dados'))
+.catch((error) => console.log(error))
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -27,6 +37,4 @@ app.post('/savequestion', (req, res) => {
 
 
 // Server
-const PORT  = 3000
-
-app.listen(PORT, (error) => error ? console.log(`Ocorreu um erro ${error}`) : console.log(`Servidor iniciado na porta ${3000}`))
+app.listen(process.env.DB_PORT, (error) => error ? console.log(`Ocorreu um erro ${error}`) : console.log(`Servidor iniciado na porta ${3000}`))
