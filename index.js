@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const connection = require('./database/database')
 
 const askModel = require('./database/Ask')
+const Ask = require('./database/Ask')
 
 dotenv.config()
 
@@ -21,7 +22,12 @@ app.use(bodyParser.json())
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('index')
+
+  Ask.findAll({ raw: true }).then(questions => {
+    res.render('index', {
+      questions
+    })
+  })
 })
 
 app.get('/ask', (req, res) => {
@@ -32,7 +38,9 @@ app.get('/ask', (req, res) => {
 app.post('/savequestion', (req, res) => {
   const { title, description } = req.body
 
-  res.send(`Formulário recebido: Título ${title} - Descrição ${description}`)
+  Ask.create({ title, description })
+  .then(() => res.redirect('/'))
+  
 })
 
 
