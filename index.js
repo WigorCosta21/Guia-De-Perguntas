@@ -4,8 +4,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const connection = require('./database/database')
 
-const askModel = require('./database/Ask')
 const Ask = require('./database/Ask')
+const Response = require('./database/Response')
 
 dotenv.config()
 
@@ -61,6 +61,15 @@ app.get('/question/:id', (req, res) => {
    }
   })
 })
+
+app.post('/respond',(req, res) => {
+  const { body, idQuestion } = req.body
+  Response.create({ body, idQuestion })
+  .then(() => {
+    res.redirect(`/question/${idQuestion}`)
+  }) 
+})
+
 
 // Server
 app.listen(process.env.DB_PORT, (error) => error ? console.log(`Ocorreu um erro ${error}`) : console.log(`Servidor iniciado!`))
