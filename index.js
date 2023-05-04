@@ -52,22 +52,26 @@ app.get('/question/:id', (req, res) => {
   Ask.findOne({
     where: { id }
   }).then((question) => {
-   if ( question != undefined) {
-    res.render('question', {
-      question
-    })
-   } else {
-    res.redirect('/')
-   }
+    if (question != undefined) {
+
+      Response.findAll({
+        where: { idQuestion: question.id },
+        order: [['id', 'DESC']]
+      }).then(answers => {
+        res.render('question', { question, answers })
+      })
+    } else {
+      res.redirect('/')
+    }
   })
 })
 
-app.post('/respond',(req, res) => {
+app.post('/respond', (req, res) => {
   const { body, idQuestion } = req.body
   Response.create({ body, idQuestion })
-  .then(() => {
-    res.redirect(`/question/${idQuestion}`)
-  }) 
+    .then(() => {
+      res.redirect(`/question/${idQuestion}`)
+    })
 })
 
 
