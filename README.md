@@ -17,15 +17,15 @@ Este é um projeto simples de um site de perguntas e respostas desenvolvido em N
    cd Guia-De-Perguntas
    ```
 
-#### Inicialize o servidor:
+## Inicialize o servidor:
 
 npm install
 ou
 yarn install
 
-### Configure as variáveis de ambiente:
+## Configure as variáveis de ambiente:
 
-#### Crie um arquivo .env na raiz do projeto e configure as seguintes variáveis:
+## Crie um arquivo .env na raiz do projeto e configure as seguintes variáveis:
 
 <p>DB_HOST=seu-host</p> 
 <p>DB_NAME=seu-banco-de-dados</p>
@@ -33,13 +33,13 @@ yarn install
 <p>DB_PASSWORD=sua-senha</p>
 <p>PORT=Porta em que o servidor irá rodar</p>
 
-### Funcionalidades
+## Funcionalidades
 
 Os usuários podem fazer perguntas.
 Os usuários podem ver as perguntas existentes.
 Os usuários podem responder às perguntas.
 
-### Estrutura do Projeto
+## Estrutura do Projeto
 
 <ul>
   <li>
